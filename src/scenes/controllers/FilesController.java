@@ -143,7 +143,7 @@ public class FilesController {
         });
 
         configuration_button.setOnAction(event -> {
-            LoaderManager.MAIN_CONTAINER.setCenter(LoaderManager.SETTINGS_CONTAINER);
+            LoaderManager.MAIN_CONTAINER.setCenter(LoaderManager.FILES_SETTINGS_CONTAINER);
         });
     }
 

@@ -139,7 +139,7 @@ public class UsersController {
         });
 
         configuration_button.setOnAction(event -> {
-            LoaderManager.MAIN_CONTAINER.setCenter(LoaderManager.SETTINGS_CONTAINER);
+            LoaderManager.MAIN_CONTAINER.setCenter(LoaderManager.USERS_SETTINGS_CONTAINER);
         });
     }
 

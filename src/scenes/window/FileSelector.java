@@ -82,10 +82,8 @@ public class FileSelector {
             fileTree.setGraphic(fileItem.getIcon());
             if(file.isDirectory()){
                 loadDirectory(fileTree, file);
-                tree.getChildren().add(fileTree);
-            } else {
-                tree.getChildren().add(fileTree);
             }
+            tree.getChildren().add(fileTree);
         }
         tree.getChildren().sort(Comparator.comparing(t -> t.getValue().getFile().isDirectory() ? 0 : 1));
     }

@@ -45,6 +45,14 @@ public class ProCopyConfiguration {
         this.maxThread = maxThread;
     }
 
+    public ArrayList<File> getBlacklistFiles() {
+        return blacklistFiles;
+    }
+
+    public ArrayList<File> getOthersFiles() {
+        return othersFiles;
+    }
+
     public ProCopyMode getMode() {
         return mode;
     }
