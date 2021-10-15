@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #6495ED;" xmlns="http://javafx.com/javafx/8.0.301" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Label prefHeight="48.0" text="Vous permet de copier les fichiers de manière complête, vous pouvez accélérer le processus en utilisants le multithreading." textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Consolas" size="16.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <BorderPane prefHeight="376.0" prefWidth="806.0" BorderPane.alignment="CENTER">
+         <left>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="231.0" spacing="5.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+               <children>
+                  <JFXComboBox fx:id="select_users" promptText="Sélectionner un utilisateur" style="-fx-prompt-text-fill: #E0E0E0;" />
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Sélectionner le dossier destination">
+                     <font>
+                        <Font name="Consolas" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="destination_path_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Chemin d'accès" underline="true">
+                     <font>
+                        <Font name="Consolas" size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXButton fx:id="destination_button" buttonType="RAISED" style="-fx-background-color: #3260b3;" text="Sélectionner" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </VBox>
+         </right>
+         <center>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@assets/images/arrow.png" />
+               </image>
+            </ImageView>
+         </center>
+      </BorderPane>
+   </center>
+   <bottom>
+      <VBox fx:id="logs_textarea" alignment="CENTER" prefHeight="131.0" prefWidth="780.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="930.0" spacing="10.0">
+               <children>
+                  <JFXButton fx:id="start_button" buttonType="RAISED" style="-fx-background-color: #3260b3;" text="Lancer le processus" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="stop_button" buttonType="RAISED" style="-fx-background-color: #f24444;" text="Annuler" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="configuration_button" buttonType="RAISED" style="-fx-background-color: #3260b3;" text="Configurations" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="logs_button" buttonType="RAISED" style="-fx-background-color: #3260b3;" text="Logs" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="20.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <JFXProgressBar fx:id="progressbar" prefHeight="20.0" prefWidth="806.0" />
+            <Text fx:id="text_progressbar" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="En attente du lancement du processus">
+               <font>
+                  <Font name="Consolas" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Text>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </bottom>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</BorderPane>

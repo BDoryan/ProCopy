@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="713.0" style="-fx-background-color: #6495ED;" xmlns="http://javafx.com/javafx/8.0.301" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <VBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="600.0" style="-fx-border-color: #e3e3e3; -fx-border-style: hidden hidden solid hidden; -fx-border-width: 2px;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="PROC0PY">
+               <font>
+                  <Font name="Consolas" size="50.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Le logiciel qui permet de copier de manière simple et efficace">
+               <font>
+                  <Font name="Consolas" size="18.0" />
+               </font>
+            </Text>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="466.0" prefWidth="243.0" spacing="5.0" style="-fx-border-color: #e3e3e3; -fx-border-width: 1.5; -fx-border-style: hidden solid hidden hidden;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="sidebar_files" style="-fx-background-color: #3260b3;" text="Transférer des fichiers" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="sidebar_users" style="-fx-background-color: #3260b3;" text="Transférer un utilisateur" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+</BorderPane>

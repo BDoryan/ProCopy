@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="794.0" spacing="5.0" style="-fx-background-color: #6495ED;" xmlns="http://javafx.com/javafx/8.0.301" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXCheckBox fx:id="copy_documents" selected="true" text="Copier les fichiers du dossier 'Documents'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_images" selected="true" text="Copier les fichiers du dossier 'Images'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_videos" selected="true" text="Copier les fichiers du dossier 'Vidéos'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_musics" selected="true" text="Copier les fichiers du dossier 'Musiques'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_3dobject" selected="true" text="Copier les fichiers du dossier 'Objects 3D'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_downloads" selected="true" text="Copier les fichiers du dossier 'Téléchargements'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_desktop" selected="true" text="Copier les fichiers du dossier 'Bureau'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_contacts" selected="true" text="Copier les fichiers du dossier 'Contacts'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_links" selected="true" text="Copier les fichiers du dossier 'Liens'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_favorites" selected="true" text="Copier les fichiers du dossier 'Favoris'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_searchs" selected="true" text="Copier les fichiers du dossier 'Recherches'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_saved_games" selected="true" text="Copier les fichiers du dossier 'Parties enregistrées'" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXButton fx:id="select_files" style="-fx-background-color: #3260b3;" text="Sélectionner plus de fichiers" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="15.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </JFXButton>
+      <JFXButton fx:id="finish_button" style="-fx-background-color: #3260b3;" text="Terminée" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="100.0" />
+         </VBox.margin>
+      </JFXButton>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

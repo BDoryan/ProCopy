@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="794.0" spacing="5.0" style="-fx-background-color: #6495ED;" xmlns="http://javafx.com/javafx/8.0.301" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXCheckBox fx:id="ignore_error" selected="true" text="Arrêter le processus lors d'une erreur" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="overwrite" text="Écraser les fichiers existant" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_emptyfile" selected="true" text="Copier les fichiers vide" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_emptydirectory" selected="true" text="Copier les dossiers vide" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_hiddenfile" selected="true" text="Copier les fichiers caché" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_hiddendirectory" selected="true" text="Copier les dossiers caché" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="copy_subdirectories" selected="true" text="Copier les sous-dossiers" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="clear_destination_directory" text="Vider le dossier de destination" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <left>
+            <VBox prefHeight="166.0" prefWidth="615.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXCheckBox fx:id="use_multithreading" text="Utiliser le multithreading (consomme des performances)" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Consolas" size="14.0" />
+                     </font>
+                  </JFXCheckBox>
+                  <Label contentDisplay="TEXT_ONLY" prefHeight="44.0" prefWidth="615.0" text="Cela permet d'accélérer le processus de copie, mais consomme des performances à l'ordinateur" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Consolas" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <VBox alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Nombre de thread:" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXTextField fx:id="thread_count" maxWidth="100.0" promptText="Nombre de thread" style="-fx-text-fill: white;" text="100">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font>
+                  </JFXTextField>
+               </children>
+            </VBox>
+         </right>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <bottom>
+            <VBox prefHeight="61.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Les entensions que vous voulez ignorer:" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="extensions_ignore" maxWidth="100.0" promptText="txt,pdf,iso" style="-fx-text-fill: white;">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font>
+                  </JFXTextField>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+         </bottom>
+      </BorderPane>
+      <JFXButton fx:id="finish_button" buttonType="RAISED" style="-fx-background-color: #3260b3;" text="Terminée" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>
