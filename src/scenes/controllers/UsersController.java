@@ -48,6 +48,8 @@ public class UsersController {
     private File destination;
     private ProCopy proCopy;
 
+    public static File userFile;
+
     @FXML
     public void initialize(){
         start_button.setDisable(true);
@@ -67,6 +69,12 @@ public class UsersController {
             select_users.getItems().add(username);
         }
         select_users.setStyle("-fx-text-fill: white;");
+        select_users.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            configuration_button.setDisable(false);
+            userFile = new File("C:/Users/"+newValue);
+        });
+
+        configuration_button.setDisable(true);
 
         start_button.setOnAction(event -> {
             if(proCopy != null)return;

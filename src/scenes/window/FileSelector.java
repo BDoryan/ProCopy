@@ -1,10 +1,24 @@
 package scenes.window;
 
+import com.jfoenix.controls.JFXButton;
+import com.sun.scenario.effect.impl.state.HVSeparableKernel;
+import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TreeCell;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -15,9 +29,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FileSelector {
 
+    private ArrayList<File> selects = new ArrayList<>();
     private TreeView<FileItem> tree;
 
     private String title;
@@ -35,7 +51,16 @@ public class FileSelector {
         this.ignoreFiles.addAll(Arrays.asList(ignoreFiles));
     }
 
-    public ArrayList<File> getIgnoreFiles() {
+    public void setSelects(ArrayList<File> selects) {
+        this.selects.clear();
+        this.selects.addAll(selects);
+    }
+
+    public void finish(){
+
+    }
+
+    private ArrayList<File> getIgnoreFiles() {
         return ignoreFiles;
     }
 
@@ -44,12 +69,53 @@ public class FileSelector {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(primaryStage);
 
-        load();
+        Label message = new Label("Chargement du répertoire : "+source.getPath());
+        message.setStyle("-fx-font-family: 'Consolas'; -fx-font-size: 18px;");
 
-        Scene scene = new Scene(tree, 500, 500);
+        VBox loading = new VBox(new ImageView(new Image("scenes/assets/images/loading.gif")));
+        loading.getChildren().add(message);
+        loading.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(loading, 500, 500);
         stage.setScene(scene);
         stage.setTitle(title);
         stage.show();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                load();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        JFXButton finish = new JFXButton("Terminé");
+                        finish.setStyle("-fx-background-color: #3260b3; -fx-font-size: 20px; -fx-font-family: 'Consolas';");
+                        finish.setTextFill(Color.WHITE);
+
+                        AnchorPane anchorPane = new AnchorPane(tree, finish);
+
+                        AnchorPane.setTopAnchor(tree, 0d);
+                        AnchorPane.setLeftAnchor(tree, 0d);
+                        AnchorPane.setRightAnchor(tree, 0d);
+                        AnchorPane.setBottomAnchor(tree, 40d);
+
+                        HBox center = new HBox();
+                        center.setMinHeight(40d);
+                        center.setMaxHeight(40d);
+                        center.setAlignment(Pos.CENTER);
+
+                        AnchorPane.setRightAnchor(finish, 0d);
+                        AnchorPane.setLeftAnchor(finish, 0d);
+                        AnchorPane.setBottomAnchor(finish, 0d);
+                        finish.setOnAction(event -> {
+                            finish();
+                        });
+
+                        scene.setRoot(anchorPane);
+                    }
+                });
+            }
+        }).start();
     }
 
     public void load(){
@@ -58,18 +124,9 @@ public class FileSelector {
         sourceTree.setExpanded(true);
 
         tree = new TreeView<>(sourceTree);
-        tree.setStyle("-fx-font-family: 'Consolas';");
-        tree.getStylesheets().add("scenes/assets/css/checkbox.css");
+        tree.setStyle("-fx-focus-color: transparent; -fx-font-family: 'Consolas';");
 
         loadDirectory(sourceTree, source);
-        tree.setCellFactory(new Callback<TreeView<FileItem>, TreeCell<FileItem>>() {
-            @Override
-            public TreeCell<FileItem> call(TreeView<FileItem> param) {
-                CheckBoxTreeCell<FileItem> node = new CheckBoxTreeCell<FileItem>();
-                node.getStyleClass().add("jfx-check-box");
-                return node;
-            }
-        });
     }
 
     private void loadDirectory(TreeItem<FileItem> tree, File source){
@@ -80,11 +137,43 @@ public class FileSelector {
             FileItem fileItem = new FileItem(file);
             TreeItem<FileItem> fileTree = new TreeItem<>(fileItem);
             fileTree.setGraphic(fileItem.getIcon());
-            if(file.isDirectory()){
+
+            boolean selected = selects.contains(file);
+
+            if(selected)
+                fileItem.setSelected(true);
+
+            fileItem.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    for(TreeItem<FileItem> item : fileTree.getChildren()){
+                        FileItem value = item.getValue();
+                        value.setSelected(newValue);
+                    }
+                }
+            });
+            fileTree.expandedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    BooleanProperty bb = (BooleanProperty) observable;
+                    TreeItem t = (TreeItem) bb.getBean();
+                    // Do whatever with t
+                    if(newValue){
+                        fileTree.getChildren().clear();
+                        loadDirectory(fileTree, file);
+                    }
+                }
+            });
+
+            if(selected && file.isDirectory()){
                 loadDirectory(fileTree, file);
             }
             tree.getChildren().add(fileTree);
         }
         tree.getChildren().sort(Comparator.comparing(t -> t.getValue().getFile().isDirectory() ? 0 : 1));
+    }
+
+    public ArrayList<File> getSelects() {
+        return selects;
     }
 }

@@ -1,5 +1,6 @@
 package scenes.window;
 
+import com.jfoenix.controls.JFXCheckBox;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
@@ -7,13 +8,15 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 
-public class FileItem {
+public class FileItem extends JFXCheckBox {
 
+    private JFXCheckBox checkBox;
     private File file;
     private ImageView icon;
-    private boolean selected = false;
 
     public FileItem(File file) {
+        super(file.getName());
+        setMaxSize(16,16);
         this.file = file;
 
         String path = "scenes/assets/images/icons/"+ (file.isDirectory() ? "directory" : "file")+".png";
@@ -25,16 +28,26 @@ public class FileItem {
         }
     }
 
+    private boolean byParent  =false;
+
+    public void setByParent(boolean byParent) {
+        this.byParent = byParent;
+    }
+
+    private boolean byParent(){
+        return byParent;
+    }
+
+    public JFXCheckBox getCheckBox() {
+        return checkBox;
+    }
+
     public File getFile() {
         return file;
     }
 
     public ImageView getIcon() {
         return icon;
-    }
-
-    public boolean isSelected() {
-        return selected;
     }
 
     @Override

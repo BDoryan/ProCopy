@@ -110,8 +110,9 @@ public class ProCopy extends Thread {
     }
 
     private void calculatesLengthByDirectory(File directory){
-        LOGGER.logDebug(directory+"");
+        if(!configuration.isSelectAll() && !configuration.getSelects().contains(directory))return;
         Arrays.stream(directory.listFiles()).forEach(file -> {
+            if(!configuration.isSelectAll() && !configuration.getSelects().contains(directory))return;
             if(file.isDirectory() && file.listFiles() != null && file.listFiles().length > 0){
                 calculatesLengthByDirectory(file);
             } else {
@@ -125,6 +126,10 @@ public class ProCopy extends Thread {
 
     public void copyFile(File source, File destination){
         LOGGER.logInfo("Copie du fichier : "+source.getPath());
+        if(!configuration.isSelectAll() && !configuration.getSelects().contains(source)){
+            LOGGER.logWarning("Le fichier ("+source.getPath()+") n'a pas été copié, ce fichier n'est pas dans la sélection.");
+            return;
+        }
 
         current += source.length();
         listeners.forEach(listener -> listener.progress(current, total));
@@ -163,10 +168,14 @@ public class ProCopy extends Thread {
     }
 
     private void copyDirectory(File source, File destination, boolean ignoreSubFolder){
+        LOGGER.logInfo("Copie du contenu du dossier : "+source);
+        if(!configuration.isSelectAll() && !configuration.getSelects().contains(source)){
+            LOGGER.logWarning("Le dossier ("+source.getPath()+") n'a pas été copié, ce dossier n'est pas dans la sélection.");
+            return;
+        }
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                LOGGER.logInfo("Copie du contenu du dossier : "+source);
                 if(source.listFiles() != null && source.listFiles().length == 0 && configuration.isBlacklisted(ProCopyType.EMPTY_DIRECTORY)){
                     LOGGER.logWarning("Le dossier ("+source.getPath()+") n'a pas à être copié, ce dossier est vide.");
                     return;

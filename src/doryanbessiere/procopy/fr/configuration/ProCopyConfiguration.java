@@ -14,8 +14,9 @@ public class ProCopyConfiguration {
     private boolean useMultiThreading = false;
     private boolean clearDestinationDirectory = true;
 
-    private ArrayList<File> blacklistFiles = new ArrayList<>();
-    private ArrayList<File> othersFiles = new ArrayList<>();
+    private boolean selectAll = true;
+
+    private ArrayList<File> selects = new ArrayList<>();
 
     private HashMap<ProCopyType, Boolean> blacklists = new HashMap<>();
 
@@ -45,12 +46,16 @@ public class ProCopyConfiguration {
         this.maxThread = maxThread;
     }
 
-    public ArrayList<File> getBlacklistFiles() {
-        return blacklistFiles;
+    public ArrayList<File> getSelects() {
+        return selects;
     }
 
-    public ArrayList<File> getOthersFiles() {
-        return othersFiles;
+    public void setSelectAll(boolean selectAll) {
+        this.selectAll = selectAll;
+    }
+
+    public boolean isSelectAll() {
+        return selectAll;
     }
 
     public ProCopyMode getMode() {
@@ -125,5 +130,31 @@ public class ProCopyConfiguration {
 
     public boolean isBlacklisted(ProCopyType type){
         return this.blacklists.get(type);
+    }
+
+    public void addSelect(File base) {
+        if(base.isDirectory()){
+            for(File file : base.listFiles()){
+                if(file.isDirectory()){
+                    addSelect(file);
+                }
+            }
+        }
+        selects.add(base);
+    }
+
+    public void removeSelect(File base){
+        if(base.isDirectory()){
+            for(File file : base.listFiles()){
+                if(file.isDirectory()){
+                    removeSelect(file);
+                }
+            }
+        }
+        selects.remove(base);
+    }
+
+    public void setSelects(ArrayList<File> selects) {
+        this.selects = selects;
     }
 }
