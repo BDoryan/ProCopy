@@ -12,7 +12,7 @@ public enum Directories {
     LINKS("Links", "Liens"),
     FAVORITES("Favorites", "Favorites"),
     SEARCHS("Searchs", "Recherches"),
-    SAVED_GAMES("Savec Games", "Partie sauvegardées");
+    SAVED_GAMES("Saved Games", "Partie sauvegardées");
 
     private String name;
     private String fr;

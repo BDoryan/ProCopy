@@ -16,7 +16,7 @@ public class ProCopyConfiguration {
 
     private boolean selectAll = true;
 
-    private ArrayList<File> selects = new ArrayList<>();
+    private ArrayList<String> selects = new ArrayList<>();
 
     private HashMap<ProCopyType, Boolean> blacklists = new HashMap<>();
 
@@ -46,8 +46,16 @@ public class ProCopyConfiguration {
         this.maxThread = maxThread;
     }
 
-    public ArrayList<File> getSelects() {
+    public ArrayList<String> getSelects() {
         return selects;
+    }
+
+    public ArrayList<File> getFileSelects() {
+        ArrayList<File> files = new ArrayList<>();
+        selects.forEach(file -> {
+            files.add(new File(file));
+        });
+        return files;
     }
 
     public void setSelectAll(boolean selectAll) {
@@ -133,28 +141,45 @@ public class ProCopyConfiguration {
     }
 
     public void addSelect(File base) {
-        if(base.isDirectory()){
+        System.out.println("AddDirectory : "+base.getPath());
+        if(base.isDirectory() && base.listFiles() != null && base.listFiles().length > 0){
             for(File file : base.listFiles()){
                 if(file.isDirectory()){
                     addSelect(file);
+                } else {
+                    selects.add(file.getPath());
+                    System.out.println("AddFile : "+file.getPath());
                 }
             }
         }
-        selects.add(base);
+        selects.add(base.getPath());
     }
 
     public void removeSelect(File base){
+        System.out.println("RemoveDirectory : "+base.getPath());
         if(base.isDirectory()){
             for(File file : base.listFiles()){
                 if(file.isDirectory()){
                     removeSelect(file);
+                } else {
+                    if(!selects.contains(file.getPath())){
+                        System.err.println("il n'existe pas");
+                    } else {
+                        selects.remove(file.getPath());
+                        System.out.println("RemoveFile : "+file.getPath());
+                    }
                 }
             }
         }
-        selects.remove(base);
+        selects.remove(base.getPath());
+        System.out.println("---");
+        selects.forEach(path -> {
+            System.out.println(" - "+path);
+        });
     }
 
-    public void setSelects(ArrayList<File> selects) {
-        this.selects = selects;
+    public void setSelects(ArrayList<String> selects) {
+        this.selects.clear();
+        this.selects.addAll(selects);
     }
 }

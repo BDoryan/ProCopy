@@ -32,7 +32,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </BorderPane.margin>
                <children>
-                  <JFXComboBox fx:id="select_users" promptText="Sélectionner un utilisateur" style="-fx-prompt-text-fill: #E0E0E0;" />
+                  <JFXComboBox fx:id="select_users" promptText="Sélectionner un utilisateur" style="-fx-prompt-text-fill: #E0E0E0; -fx-text-fill: #FFFFFF;" />
                </children>
             </VBox>
          </left>

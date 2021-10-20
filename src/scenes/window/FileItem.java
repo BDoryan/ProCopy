@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 
@@ -25,6 +26,13 @@ public class FileItem extends JFXCheckBox {
         icon.setFitWidth(16);
         if(file.isHidden()){
             icon.setOpacity(0.3);
+            setTextFill(new Color(0,0,0,0.3));
+        } else {
+            if(file.isDirectory() && (file.listFiles() == null || file.listFiles().length == 0)){
+                setTextFill(new Color(0,0,0,0.75));
+                setText(file.getName()+" (vide)");
+                icon.setOpacity(0.75);
+            }
         }
     }
 

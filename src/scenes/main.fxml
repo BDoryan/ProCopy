@@ -42,12 +42,12 @@
             <Separator prefWidth="200.0" />
             <JFXButton fx:id="sidebar_users" style="-fx-background-color: #3260b3;" text="Importer un utilisateur" textFill="WHITE">
                <font>
-                  <Font name="Consolas" size="14.0" />
+                  <Font name="Consolas" size="15.0" />
                </font>
             </JFXButton>
             <JFXButton fx:id="sidebar_users1" style="-fx-background-color: #3260b3;" text="Exporter un utilisateur" textFill="WHITE">
                <font>
-                  <Font name="Consolas" size="14.0" />
+                  <Font name="Consolas" size="15.0" />
                </font>
             </JFXButton>
          </children>

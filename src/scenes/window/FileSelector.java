@@ -33,7 +33,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FileSelector {
 
-    private ArrayList<File> selects = new ArrayList<>();
+    private ArrayList<String> selects = new ArrayList<>();
     private TreeView<FileItem> tree;
 
     private String title;
@@ -51,21 +51,22 @@ public class FileSelector {
         this.ignoreFiles.addAll(Arrays.asList(ignoreFiles));
     }
 
-    public void setSelects(ArrayList<File> selects) {
+    public void setSelects(ArrayList<String> selects) {
         this.selects.clear();
         this.selects.addAll(selects);
     }
 
     public void finish(){
-
+        stage.close();
     }
 
     private ArrayList<File> getIgnoreFiles() {
         return ignoreFiles;
     }
+    private Stage stage;
 
     public void show(Stage primaryStage) {
-        Stage stage = new Stage();
+        stage = new Stage();
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(primaryStage);
 
@@ -130,7 +131,7 @@ public class FileSelector {
     }
 
     private void loadDirectory(TreeItem<FileItem> tree, File source){
-        if(source.listFiles() == null || source.listFiles().length < 0)return;
+        if(source.listFiles() == null || source.listFiles().length < 0) return;
         for(File file : Objects.requireNonNull(source.listFiles(pathname -> {
             return !ignoreFiles.contains(pathname);
         }))){
@@ -138,14 +139,23 @@ public class FileSelector {
             TreeItem<FileItem> fileTree = new TreeItem<>(fileItem);
             fileTree.setGraphic(fileItem.getIcon());
 
-            boolean selected = selects.contains(file);
+            boolean selected = selects.contains(file.getPath());
 
-            if(selected)
+            if(selected || tree.getValue().isSelected())
                 fileItem.setSelected(true);
 
             fileItem.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if(newValue){
+                        addSelect(fileItem.getFile());
+                        fileTree.setExpanded(true);
+                        System.out.println("Add : "+fileItem.getFile());
+                    } else {
+                        removeSelect(fileItem.getFile());
+                        System.out.println("Remove : "+fileItem.getFile());
+                    }
+
                     for(TreeItem<FileItem> item : fileTree.getChildren()){
                         FileItem value = item.getValue();
                         value.setSelected(newValue);
@@ -167,13 +177,53 @@ public class FileSelector {
 
             if(selected && file.isDirectory()){
                 loadDirectory(fileTree, file);
+            } else if (!selected && file.isDirectory()){
+                if(file.listFiles() != null && file.listFiles().length > 0){
+                    FileItem fakeItem = new FileItem(new File("~"));
+                    TreeItem<FileItem> fakeTree = new TreeItem<>(fakeItem);
+                    fileTree.getChildren().add(fakeTree);
+                }
             }
             tree.getChildren().add(fileTree);
         }
         tree.getChildren().sort(Comparator.comparing(t -> t.getValue().getFile().isDirectory() ? 0 : 1));
     }
 
-    public ArrayList<File> getSelects() {
+    public void addSelect(File base) {
+        if(base.isDirectory() && base.listFiles() != null && base.listFiles().length > 0){
+            for(File file : base.listFiles()){
+                if(file.isDirectory()){
+                    addSelect(file);
+                } else {
+                    selects.add(file.getPath());
+                }
+            }
+        }
+        selects.add(base.getPath());
+    }
+
+    public void removeSelect(File base){
+        if(base.isDirectory()){
+            for(File file : base.listFiles()){
+                if(file.isDirectory()){
+                    removeSelect(file);
+                } else {
+                    selects.remove(file.getPath());
+                }
+            }
+        }
+        selects.remove(base.getPath());
+    }
+
+    public ArrayList<String> getSelects() {
         return selects;
+    }
+
+    public ArrayList<File> getFileSelects() {
+        ArrayList<File> files = new ArrayList<>();
+        selects.forEach(file -> {
+            files.add(new File(file));
+        });
+        return files;
     }
 }

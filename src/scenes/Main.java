@@ -67,6 +67,6 @@ public class Main extends Application {
 
         LoaderManager.MAIN_CONTAINER.getStylesheets().add("/scenes/assets/css/jfxcombobox.css");
 
-        new FileSelector("test", new File(System.getProperty("user.home")+"/Documents")).show(primaryStage);
+        //new FileSelector("test", new File(System.getProperty("user.home")+"/Documents")).show(primaryStage);
     }
 }

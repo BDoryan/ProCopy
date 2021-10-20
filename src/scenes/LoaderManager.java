@@ -13,8 +13,8 @@ public class LoaderManager {
     public static BorderPane FILES_CONTAINER;
     public static BorderPane USERS_CONTAINER;
 
-    public static VBox FILES_SETTINGS_CONTAINER;
-    public static VBox USERS_SETTINGS_CONTAINER;
+    public static LoadComponent FILES_SETTINGS_CONTAINER;
+    public static LoadComponent USERS_SETTINGS_CONTAINER;
 
     public static void initialize() throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -39,12 +39,10 @@ public class LoaderManager {
 
         loader = new FXMLLoader();
         loader.setLocation(LoaderManager.class.getClassLoader().getResource("scenes/filesSettings.fxml"));
-        loader.setController(new FilesSettingsController());
-        FILES_SETTINGS_CONTAINER = (VBox) loader.load();
+        FILES_SETTINGS_CONTAINER = new LoadComponent(loader, new FilesSettingsController());
 
         loader = new FXMLLoader();
         loader.setLocation(LoaderManager.class.getClassLoader().getResource("scenes/usersSettings.fxml"));
-        loader.setController(new UsersSettingsController());
-        USERS_SETTINGS_CONTAINER = (VBox) loader.load();
+        USERS_SETTINGS_CONTAINER = new LoadComponent(loader, new UsersSettingsController());
     }
 }

@@ -41,8 +41,8 @@ public class UsersSettingsController {
 
     private HashMap<Directories, JFXCheckBox> checkboxs = new HashMap<>();
 
-    public void initialize(){
-        configuration.setSelectAll(false);
+    public void load(){
+        if(checkboxs.size() > 0)return;
         for(Directories directory : Directories.values()){
             File fileDirectory = new File(UsersController.userFile, directory.getName());
             JFXCheckBox checkbox = new JFXCheckBox("Copier le dossier '"+directory.getFr()+"' du répertoire utilisateur.");
@@ -60,6 +60,17 @@ public class UsersSettingsController {
             configuration.addSelect(fileDirectory);
             box.getChildren().add(checkbox);
         }
+    }
+
+    public void check(){
+        for(Directories directory : Directories.values()){
+            File fileDirectory = new File(UsersController.userFile, directory.getName());
+            checkboxs.get(directory).setSelected(configuration.getSelects().contains(fileDirectory.getPath()));
+        }
+    }
+
+    public void initialize(){
+        configuration.setSelectAll(false);
 
         select_files.setOnAction(event -> {
             FileSelector fileSelector = new FileSelector("Sélectionner les fichiers à importer", UsersController.userFile){
@@ -67,6 +78,7 @@ public class UsersSettingsController {
                 public void finish() {
                     super.finish();
                     configuration.setSelects(getSelects());
+                    check();
                 }
             };
             fileSelector.setSelects(configuration.getSelects());

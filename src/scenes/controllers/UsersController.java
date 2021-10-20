@@ -147,7 +147,8 @@ public class UsersController {
         });
 
         configuration_button.setOnAction(event -> {
-            LoaderManager.MAIN_CONTAINER.setCenter(LoaderManager.USERS_SETTINGS_CONTAINER);
+            LoaderManager.MAIN_CONTAINER.setCenter(LoaderManager.USERS_SETTINGS_CONTAINER.getNode());
+            ((UsersSettingsController) LoaderManager.USERS_SETTINGS_CONTAINER.getController()).load();
         });
     }
 
