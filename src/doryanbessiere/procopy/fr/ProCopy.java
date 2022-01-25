@@ -102,6 +102,11 @@ public class ProCopy extends Thread {
     public void finish(){
         elapsed = System.currentTimeMillis() - start;
         LOGGER.logInfo("La copie de tout les fichiers est terminée. (temps="+elapsed+"'ms)");
+        if(!result()){
+            LOGGER.logError(LOGGER.getLogs(Logger.Type.ERROR).size() + " erreur(s) ont été détecté.");
+        } else {
+            LOGGER.logInfo("Aucune erreur détecté lors du déroulage du processus.");
+        }
         listeners.forEach(listener -> listener.finish());
     }
 

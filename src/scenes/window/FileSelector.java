@@ -160,6 +160,11 @@ public class FileSelector {
                         FileItem value = item.getValue();
                         value.setSelected(newValue);
                     }
+
+                    System.out.println("--{getFileSelects}--");
+                    getFileSelects().forEach(file -> System.out.println(" - "+file.getName()));
+                    System.out.println("--{ignoreFiles}--");
+                    ignoreFiles.forEach(file -> System.out.println(" - "+file.getName()));
                 }
             });
             fileTree.expandedProperty().addListener(new ChangeListener<Boolean>() {

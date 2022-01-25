@@ -16,19 +16,6 @@ import java.io.File;
 
 public class Main extends Application {
 
-    /**
-     *
-     * 6684ms (sans le multithread)
-     * 3483 (avec multithread, max=800)
-     *
-     * --
-     * Multithread (capacité maximum de thread : 500) : 4209ms
-     * Sans : 4757ms
-     * --
-     * Multithread (capacité maximum de thread : 500) : 2648ms
-     * Sans : 4172ms
-     *
-     */
     public static void test() {
         ProCopy proCopy = new ProCopy(new File("C:\\Users\\Utilisateur\\Documents\\ProCopy\\source"), new File("C:\\Users\\Utilisateur\\Documents\\ProCopy\\destination"));
         proCopy.setConfiguration(new ProCopyConfiguration(

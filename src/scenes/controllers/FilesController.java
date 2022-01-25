@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
 import doryanbessiere.procopy.fr.ProCopy;
 import doryanbessiere.procopy.fr.ProCopyListener;
+import doryanbessiere.procopy.fr.commons.logger.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
@@ -103,7 +104,8 @@ public class FilesController {
                                     stop_button.setDisable(true);
 
                                     progressbar.setProgress(1);
-                                    text_progressbar.setText("Le processus est terminé, temps d'éxécution : "+getElapsed(proCopy.getElapsed()));
+                                    text_progressbar.setText("Le processus est terminé, "+(proCopy.result() ? ProCopy.LOGGER.getLogs(Logger.Type.ERROR).size() + " erreur(s) ont été détecté" : "aucune erreur à été détecté")+", temps d'éxécution : "+getElapsed(proCopy.getElapsed()));
+
                                     proCopy = null;
                                 }
                             });
