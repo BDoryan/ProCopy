@@ -1,14 +1,16 @@
 package scenes;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 import doryanbessiere.procopy.fr.ProCopy;
 import doryanbessiere.procopy.fr.configuration.ProCopyConfiguration;
 import doryanbessiere.procopy.fr.configuration.ProCopyMode;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import scenes.controllers.MainController;
 import scenes.window.FileSelector;
 
@@ -48,6 +50,13 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(LoaderManager.MAIN_CONTAINER));
         primaryStage.setMinHeight(720);
         primaryStage.setMinWidth(1080);
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
 
         primaryStage.show();
         stage = primaryStage;

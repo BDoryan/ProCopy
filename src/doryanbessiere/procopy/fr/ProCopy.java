@@ -55,6 +55,7 @@ public class ProCopy extends Thread {
         finish.set(false);
         LOGGER.logInfo("Démarrage du processus de copie...");
         if(!destination.isDirectory() && destination.exists()){
+            error(new Exception(destination+", destination is not a directory !"));
             LOGGER.logError("Le fichier de destination n'est pas un répertoire!");
             return;
         }
