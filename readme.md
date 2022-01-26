@@ -60,3 +60,10 @@ Ce projet n'est pas qu'un simple programme, derrière j'utilise l'API ProC0PY, c
 ### Interface du transfert de fichier![Interface du transfert de fichier](https://i.ibb.co/X39Y6pG/Capture-d-cran-2022-01-26-090619.png)
 ### Interface du transfert de fichier
 ![Interface importation de fichier](https://i.ibb.co/fvCRy6Z/Capture-d-cran-2022-01-26-090720.png)
+
+# Téléchargement
+
+Si vous avez l'envie d'utiliser le programme, il vous faut l'éxécuter avec la version 8 de Java.
+
+    /target/procopy-java-8.jar
+[Lien de téléchargement](https://github.com/BDoryan/ProCopy/target/procopy-java-8.jar)
