@@ -66,4 +66,4 @@ Ce projet n'est pas qu'un simple programme, derrière j'utilise l'API ProC0PY, c
 Si vous avez l'envie d'utiliser le programme, il vous faut l'éxécuter avec la version 8 de Java.
 
     /target/procopy-java-8.jar
-[Lien de téléchargement](https://github.com/BDoryan/ProCopy/tree/master/target/procopy-java-8.jar)
+[Lien de téléchargement](https://github.com/BDoryan/ProCopy/tree/master/target/)
